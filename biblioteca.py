@@ -1,6 +1,22 @@
+import csv
+
+
 def carica_da_file(file_path):
     """Carica i libri dal file"""
-    # TODO
+    try:
+        file=open(file_path,"r",encoding="utf-8")
+        file.readline()
+        reader = csv.reader(file)
+        dizionario={}
+        for riga in reader:
+            dizionario[riga[0]]=riga[1:]
+
+        #for chiave in dizionario:
+        #   print(chiave)
+
+        file.close()
+    except FileNotFoundError:
+        return None
 
 
 def aggiungi_libro(biblioteca, titolo, autore, anno, pagine, sezione, file_path):
