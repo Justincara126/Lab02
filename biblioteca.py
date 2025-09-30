@@ -10,23 +10,39 @@ def carica_da_file(file_path):
         dizionario={}
         for riga in reader:
             dizionario[riga[0]]=riga[1:]
-
-        #for chiave in dizionario:
-        #   print(chiave)
-
         file.close()
+        return dizionario
     except FileNotFoundError:
         return None
 
 
 def aggiungi_libro(biblioteca, titolo, autore, anno, pagine, sezione, file_path):
     """Aggiunge un libro nella biblioteca"""
-    # TODO
+    try:
+        if titolo in biblioteca:
+            print('Il libro è già presente nella biblioteca')
+            return None
+        elif sezione >5 or sezione <1:
+            return None
+        else:
+            file=open(file_path, "a", encoding="utf-8")
+            writer = csv.writer(file)
+            riga=[titolo,autore,anno,pagine,sezione]
+            writer.writerow(riga)
+            file.close()
+            return riga
+    except FileNotFoundError:
+        return None
 
 
 def cerca_libro(biblioteca, titolo):
     """Cerca un libro nella biblioteca dato il titolo"""
-    # TODO
+    stringa=str(titolo)+', '
+    if titolo in biblioteca:
+        for i in biblioteca[titolo]:
+            stringa=stringa+str(i)+', '
+
+    return stringa.rstrip(', ')
 
 
 def elenco_libri_sezione_per_titolo(biblioteca, sezione):
