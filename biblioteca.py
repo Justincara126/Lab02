@@ -31,6 +31,7 @@ def aggiungi_libro(biblioteca, titolo, autore, anno, pagine, sezione, file_path)
             file=open(file_path, "a",newline='',encoding="utf-8")
             writer = csv.writer(file)
             riga=[titolo,autore,anno,pagine,sezione]
+            biblioteca[titolo]=[autore,anno,pagine,sezione]
             #riga.strip('\n')
             #stringa=f'{titolo}{autore}{anno}{pagine}{sezione}'
             writer.writerow([titolo,autore,anno,pagine,sezione])
